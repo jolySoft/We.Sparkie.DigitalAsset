@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using We.Sparkie.DigitalAsset.Api.Repository;
 
 namespace We.Sparkie.DigitalAsset.Api.Entities
 {
     public class Asset : Entity
     {
-        private Dictionary<string, IEncodingStrategy> _encodingStrategies;
+        private readonly Dictionary<string, IEncodingStrategy> _encodingStrategies;
 
         public Asset()
         {
@@ -20,20 +22,24 @@ namespace We.Sparkie.DigitalAsset.Api.Entities
         public decimal Size { get; set; }
         public int BitDepth { get; set; }
         public decimal SampleRate { get; set; }
-        public Uri Location { get; set; }
+        public Guid Location { get; set; }
         public string Genre { get; set; }
 
 
-        public void Upload(string name, MemoryStream audioStream)
+        public async Task Upload(string name, MemoryStream audioStream, ICloudStorage storage, IRepository<Asset> repository)
         {
             Name = name;
             var typeFromExtension = ExtractTypeFromExtension(name);
             _encodingStrategies[typeFromExtension].PopulateAssetMetadata(this, audioStream);
+
+            Location = await storage.Upload(this);
+            await repository.Insert(this);
         }
 
         private string ExtractTypeFromExtension(string name)
         {
-            return "wav";
+            var extension = Path.GetExtension(name);
+            return extension.Substring(1).ToLower();
         }
     }
 }

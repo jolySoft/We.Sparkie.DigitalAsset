@@ -6,7 +6,7 @@ using We.Sparkie.DigitalAsset.Api.Entities;
 
 namespace We.Sparkie.DigitalAsset.Api.Repository
 {
-    public class Repository<TEntity> where TEntity : Entity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
         private readonly MongoDatabaseBase _database;
         private IMongoCollection<TEntity> _entities;

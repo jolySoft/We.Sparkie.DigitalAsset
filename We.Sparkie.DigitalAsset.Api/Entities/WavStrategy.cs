@@ -12,7 +12,6 @@ namespace We.Sparkie.DigitalAsset.Api.Entities
 
         public void PopulateAssetMetadata(Asset asset, MemoryStream audioStream)
         {
-            
             IWaveProvider provider = new WaveFileReader(audioStream);
 
             asset.BitDepth = provider.WaveFormat.BitsPerSample;
