@@ -1,10 +1,11 @@
 ﻿using System.Security.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using Swashbuckle.AspNetCore.Swagger;
 using We.Sparkie.DigitalAsset.Api.Repository;
 
 namespace We.Sparkie.DigitalAsset.Api
@@ -21,7 +22,7 @@ namespace We.Sparkie.DigitalAsset.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            var connectionString = Configuration["PROFILE_DB_CONNECTION_STRING"];
+            var connectionString = Configuration["MONGO_DB_CONNECTION_STRING"];
 
             services.AddScoped<MongoDatabaseBase>(x =>
             {
@@ -33,18 +34,33 @@ namespace We.Sparkie.DigitalAsset.Api
             });
 
             services.AddScoped(typeof(Repository<>));
+            //services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info { Title = this.GetType().Assembly.FullName, Version = "v1" }); });
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //app.UseSwagger();
+
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Profile API V1");
+            //});
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
+            //app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            //app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                endpoints.MapControllers();
             });
         }
     }

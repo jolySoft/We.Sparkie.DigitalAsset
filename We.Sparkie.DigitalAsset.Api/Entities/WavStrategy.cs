@@ -5,11 +5,6 @@ namespace We.Sparkie.DigitalAsset.Api.Entities
 {
     public class WavStrategy : IEncodingStrategy
     {
-        
-        public WavStrategy()
-        {
-        }
-
         public void PopulateAssetMetadata(Asset asset, MemoryStream audioStream)
         {
             IWaveProvider provider = new WaveFileReader(audioStream);

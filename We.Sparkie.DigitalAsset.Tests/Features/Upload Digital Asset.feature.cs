@@ -40,8 +40,7 @@ namespace We.Sparkie.DigitalAsset.Tests.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Upload Digital Asset", "\tIn order to manage my audio files\r\n\tAs an audiofile\r\n\tI want to upload, download" +
-                    ", delete and list files", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Upload Digital Asset", "\tIn order to manage my audio files\r\n\tAs an audiofile\r\n\tI want to upload files", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -114,18 +113,18 @@ this.ScenarioInitialize(scenarioInfo);
 #line 8
     testRunner.When("I upload it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Size",
                             "Bit Depth",
                             "Sample Rate"});
-                table1.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "Ochre - Project Caelus - 06 Crowd of Stars.wav",
-                            "70,002,656",
+                            "3,458,286",
                             "24",
                             "44100"});
 #line 9
-    testRunner.Then("I get the following details", ((string)(null)), table1, "Then ");
+    testRunner.Then("I get the following details", ((string)(null)), table4, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
