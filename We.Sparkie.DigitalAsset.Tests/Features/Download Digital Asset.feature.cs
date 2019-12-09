@@ -175,7 +175,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "44100"});
                 table2.AddRow(new string[] {
                             "F9700558-A488-40BD-B572-E301C4D5286D",
-                            "Brian Adams - Some really bad.wav",
+                            "Brian Adams - Something really bad.wav",
                             "4AFE0223-6007-4C0D-898D-6BB0B89328F6",
                             "7,0345,462",
                             "16",
@@ -200,7 +200,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "44100"});
                 table3.AddRow(new string[] {
                             "F9700558-A488-40BD-B572-E301C4D5286D",
-                            "Brian Adams - Some really bad.wav",
+                            "Brian Adams - Something really bad.wav",
                             "7,0345,462",
                             "16",
                             "44100"});

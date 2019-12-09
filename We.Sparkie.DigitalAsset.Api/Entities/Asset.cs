@@ -55,6 +55,7 @@ namespace We.Sparkie.DigitalAsset.Api.Entities
         {
             return (await repository.Get()).Select(a => new Asset()
             {
+                Id = a.Id,
                 Name = a.Name,
                 BitDepth = a.BitDepth,
                 SampleRate = a.SampleRate,

@@ -122,7 +122,7 @@ namespace We.Sparkie.DigitalAsset.Tests.Steps
         {
             var expected = table.CreateSet<Asset>();
 
-            _assets.Should().AllBeEquivalentTo(expected);
+            _assets.Should().BeEquivalentTo(expected);
         }
     }
 }
