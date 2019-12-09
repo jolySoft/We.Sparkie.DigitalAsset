@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Bson.Serialization.Attributes;
 using We.Sparkie.DigitalAsset.Api.Repository;
 using We.Sparkie.DigitalAsset.Api.Services;
 
@@ -25,6 +26,7 @@ namespace We.Sparkie.DigitalAsset.Api.Entities
         public int BitDepth { get; set; }
         public decimal SampleRate { get; set; }
         public Guid Location { get; set; }
+        [BsonIgnore]
         public MemoryStream Stream { get; set; }
         public string Genre { get; set; }
 

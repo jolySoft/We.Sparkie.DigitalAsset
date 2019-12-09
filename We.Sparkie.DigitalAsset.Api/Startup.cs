@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using Swashbuckle.AspNetCore.Swagger;
 using We.Sparkie.DigitalAsset.Api.Repository;
+using We.Sparkie.DigitalAsset.Api.Services;
 
 namespace We.Sparkie.DigitalAsset.Api
 {
@@ -32,10 +33,12 @@ namespace We.Sparkie.DigitalAsset.Api
 
                 settings.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
                 var client = new MongoClient(settings);
-                return (MongoDatabaseBase)client.GetDatabase("Profile");
+                return (MongoDatabaseBase)client.GetDatabase("Sparkie");
             });
 
-            services.AddScoped(typeof(Repository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<ICloudStorage, AzureStorage>();
+
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = this.GetType().Assembly.FullName, Version = "v1" }); });
             services.AddControllers();
         }

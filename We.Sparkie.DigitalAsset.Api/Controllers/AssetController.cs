@@ -26,7 +26,7 @@ namespace We.Sparkie.DigitalAsset.Api.Controllers
         public async Task<IActionResult> Upload(IFormFile file)
         {
             var stream = new MemoryStream();
-            file.CopyTo(stream);
+            await file.CopyToAsync(stream);
             var asset = new Asset();
             await asset.Upload(file.FileName, stream, _storage, _repository);
             return Ok(asset.Id);
