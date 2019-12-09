@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
 using We.Sparkie.DigitalAsset.Api.Entities;
 
@@ -28,9 +29,15 @@ namespace We.Sparkie.DigitalAsset.Api.Services
             return location;
         }
 
-        public Task<MemoryStream> Download(Guid location)
+        public async Task<MemoryStream> Download(Guid location)
         {
-            throw new NotImplementedException();
+            _containerClient = await _serviceClient.CreateBlobContainerAsync("Audio");
+            var blobClient = _containerClient.GetBlobClient(location.ToString());
+            BlobDownloadInfo download = await blobClient.DownloadAsync();
+
+            var stream = new MemoryStream();
+            await download.Content.CopyToAsync(stream);
+            return stream;
         }
     }
 }
