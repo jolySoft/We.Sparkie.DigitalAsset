@@ -22,6 +22,7 @@ namespace We.Sparkie.DigitalAsset.Api.Controllers
         }
 
         [Route("upload")]
+        [HttpPost]
         public async Task<IActionResult> Upload(IFormFile file)
         {
             var stream = new MemoryStream();
