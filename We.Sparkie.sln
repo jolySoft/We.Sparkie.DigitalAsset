@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "We.Sparkie.DigitalAsset.Api
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "We.Sparkie.DigitalAsset.Tests", "We.Sparkie.DigitalAsset.Tests\We.Sparkie.DigitalAsset.Tests.csproj", "{7D64C0AE-49DB-48B5-AA07-72127039DFF6}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{94EB6CD2-0337-490F-87A1-CFA7F5299CCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{7D64C0AE-49DB-48B5-AA07-72127039DFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D64C0AE-49DB-48B5-AA07-72127039DFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D64C0AE-49DB-48B5-AA07-72127039DFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94EB6CD2-0337-490F-87A1-CFA7F5299CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94EB6CD2-0337-490F-87A1-CFA7F5299CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94EB6CD2-0337-490F-87A1-CFA7F5299CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94EB6CD2-0337-490F-87A1-CFA7F5299CCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

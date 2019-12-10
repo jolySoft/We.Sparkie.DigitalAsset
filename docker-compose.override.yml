@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  we.sparkie.digitalasset.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - AZURE_BLOB_KEY=Kul3L5RXDoSMwbMuoY1nBB+bmwomwLz51LSQMrzyPm1aSiRQ7kJ54ipkk/kMCOnU2jLzex3sj6IJz5C3WwEhQg==
+      - AZURE_BLOB_ACCOUNT_NAME=sparkieassets
+      - MONGO_DB_CONNECTION_STRING=mongodb://mongodb:27017/admin
+    ports:
+      - "80"

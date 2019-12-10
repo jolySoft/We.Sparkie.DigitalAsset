@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  we.sparkie.digitalasset.api:
+    image: ${DOCKER_REGISTRY-}wesparkiedigitalassetapi
+    build:
+      context: .
+      dockerfile: We.Sparkie.DigitalAsset.Api/Dockerfile
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    environment:
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+    volumes:
+        - ./data/db
+    ports:
+        - "27017:27017"
