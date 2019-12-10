@@ -331,3 +331,4 @@ ASALocalRun/
 
 #Docker debugging
 dockerfile.env
+docker-compose.override.yml
