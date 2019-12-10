@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,14 @@ namespace We.Sparkie.DigitalAsset.Api.Controllers
             var asset = new Asset();
             await asset.Upload(file.FileName, stream, _storage, _repository);
             return Ok(asset.Id);
+        }
+
+        [Route("download")]
+        [HttpGet]
+        public async Task<IActionResult> Download(Guid id)
+        {
+            var asset = await Asset.Download(id, _storage, _repository);
+            return Ok(asset);
         }
     }
 }
