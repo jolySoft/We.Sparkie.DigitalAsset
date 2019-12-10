@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,10 +36,11 @@ namespace We.Sparkie.DigitalAsset.Api.Controllers
 
         [Route("download")]
         [HttpGet]
-        public async Task<IActionResult> Download(Guid id)
+        public async Task<FileStreamResult> Download(Guid id)
         {
             var asset = await Asset.Download(id, _storage, _repository);
-            return Ok(asset);
+            Response.ContentType = new MediaTypeHeaderValue(asset.ContentType).ToString();// Content type
+            return new FileStreamResult(asset.Stream, asset.ContentType) { FileDownloadName = asset.Name };
         }
     }
 }

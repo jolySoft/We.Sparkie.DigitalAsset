@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Swashbuckle.AspNetCore.Swagger;
 using We.Sparkie.DigitalAsset.Api.Repository;
@@ -32,6 +33,7 @@ namespace We.Sparkie.DigitalAsset.Api
                 MongoClientSettings settings = MongoClientSettings.FromUrl(new MongoUrl(connectionString));
 
                 settings.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
+                settings.GuidRepresentation = GuidRepresentation.Standard;
                 var client = new MongoClient(settings);
                 return (MongoDatabaseBase)client.GetDatabase("Sparkie");
             });

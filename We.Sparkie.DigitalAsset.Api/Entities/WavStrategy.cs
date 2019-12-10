@@ -14,6 +14,7 @@ namespace We.Sparkie.DigitalAsset.Api.Entities
             asset.Size = audioStream.Length;
             asset.SampleRate = provider.WaveFormat.SampleRate;
             asset.Stream = audioStream;
+            asset.ContentType = "audio/wav";
         }
     }
 }

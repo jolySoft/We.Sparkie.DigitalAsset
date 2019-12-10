@@ -28,6 +28,7 @@ namespace We.Sparkie.DigitalAsset.Api.Entities
         public Guid Location { get; set; }
         [BsonIgnore]
         public MemoryStream Stream { get; set; }
+        public string ContentType { get; set; }
         public string Genre { get; set; }
 
         public async Task Upload(string name, MemoryStream audioStream, ICloudStorage storage, IRepository<Asset> repository)
@@ -50,6 +51,7 @@ namespace We.Sparkie.DigitalAsset.Api.Entities
         {
             var asset = await repository.Get(id);
             asset.Stream = await storage.Download(asset.Location);
+            asset.Stream.Position = 0;
             return asset;
         }
 

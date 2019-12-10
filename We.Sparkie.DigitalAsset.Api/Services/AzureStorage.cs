@@ -27,6 +27,7 @@ namespace We.Sparkie.DigitalAsset.Api.Services
             var location = Guid.NewGuid();
             var container = _client.GetContainerReference("audio");
             var blob = container.GetBlockBlobReference(location.ToString());
+            blob.Metadata["ContentType"] = asset.ContentType;
             await blob.UploadFromStreamAsync(asset.Stream);
             
             return location;
