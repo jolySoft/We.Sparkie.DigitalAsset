@@ -2,43 +2,48 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Microsoft.WindowsAzure.Storage.Auth;
-using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.File;
 using We.Sparkie.DigitalAsset.Api.Entities;
 
 namespace We.Sparkie.DigitalAsset.Api.Services
 {
     public class AzureStorage : ICloudStorage
     {
-        private string _accountName;
-        private string _key;
-        private CloudBlobClient _client;
+        private string _connectionString;
+        private CloudFileClient _client;
 
         public AzureStorage(IConfiguration configuration)
         {
-            _accountName = configuration["AZURE_BLOB_ACCOUNT_NAME"];
-            _key = configuration["AZURE_BLOB_KEY"];
-            var creds = new StorageCredentials(_accountName, _key);
-            _client = new CloudBlobClient(new Uri("https://sparkieassets.blob.core.windows.net"), creds);
+            _connectionString = configuration["AZURE_FILE_CONNECTION_STRING"];
+            var storageAccount = CloudStorageAccount.Parse(_connectionString);
+
+            _client = storageAccount.CreateCloudFileClient();
         }
 
         public async Task<Guid> Upload(Asset asset)
         {
             var location = Guid.NewGuid();
-            var container = _client.GetContainerReference("audio");
-            var blob = container.GetBlockBlobReference(location.ToString());
-            blob.Metadata["ContentType"] = asset.ContentType;
-            await blob.UploadFromStreamAsync(asset.Stream);
-            
+
+            var share = _client.GetShareReference("audio");
+            await share.CreateIfNotExistsAsync();
+            var dir = share.GetRootDirectoryReference();
+            var file = dir.GetFileReference(location.ToString());
+            await file.UploadFromStreamAsync(asset.Stream);
+            file.Properties.ContentType = asset.ContentType;
+            await file.SetPropertiesAsync();
+
             return location;
         }
 
         public async Task<MemoryStream> Download(Guid location)
         {
             var stream = new MemoryStream();
-            var container = _client.GetContainerReference("audio");
-            var blob = container.GetBlockBlobReference(location.ToString());
-            await blob.DownloadToStreamAsync(stream);
+            var share = _client.GetShareReference("audio");
+            var dir = share.GetRootDirectoryReference();
+            var file = dir.GetFileReference(location.ToString());
+            await file.DownloadToStreamAsync(stream);
             return stream;
         }
     }

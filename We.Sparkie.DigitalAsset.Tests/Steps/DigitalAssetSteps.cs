@@ -89,7 +89,7 @@ namespace We.Sparkie.DigitalAsset.Tests.Steps
         {
             var expected = table.CreateInstance<Asset>();
 
-            expected.Should().BeEquivalentTo(_asset);
+            expected.Should().BeEquivalentTo(_asset, c => c.Excluding(a => a.Stream));
         }
 
         [Then(@"it is put in storage")]
@@ -123,6 +123,12 @@ namespace We.Sparkie.DigitalAsset.Tests.Steps
             var expected = table.CreateSet<Asset>();
 
             _assets.Should().BeEquivalentTo(expected);
+        }
+
+        [Then(@"the stream is reset")]
+        public void ThenTheStreamIsReset()
+        {
+            _asset.Stream.Position.Should().Be(0);
         }
     }
 }

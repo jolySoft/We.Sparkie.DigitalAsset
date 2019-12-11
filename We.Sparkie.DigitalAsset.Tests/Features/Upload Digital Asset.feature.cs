@@ -117,12 +117,14 @@ this.ScenarioInitialize(scenarioInfo);
                             "Name",
                             "Size",
                             "Bit Depth",
-                            "Sample Rate"});
+                            "Sample Rate",
+                            "Content Type"});
                 table4.AddRow(new string[] {
                             "Ochre - Project Caelus - 06 Crowd of Stars.wav",
                             "3,458,286",
                             "24",
-                            "44100"});
+                            "44100",
+                            "audio/wav"});
 #line 9
     testRunner.Then("I get the following details", ((string)(null)), table4, "Then ");
 #line hidden
@@ -205,6 +207,46 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 21
     testRunner.Then("its metadata is stored", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Audio stream is reset once metadata is extracted")]
+        [Xunit.TraitAttribute("FeatureTitle", "Upload Digital Asset")]
+        [Xunit.TraitAttribute("Description", "Audio stream is reset once metadata is extracted")]
+        public virtual void AudioStreamIsResetOnceMetadataIsExtracted()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Audio stream is reset once metadata is extracted", null, ((string[])(null)));
+#line 23
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 24
+    testRunner.Given("I have this wav file", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 25
+    testRunner.When("I upload it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 26
+    testRunner.Then("the stream is reset", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

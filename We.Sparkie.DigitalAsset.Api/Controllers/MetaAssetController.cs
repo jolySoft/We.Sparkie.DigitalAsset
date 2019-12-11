@@ -10,6 +10,6 @@ namespace We.Sparkie.DigitalAsset.Api.Controllers
     //[Authorize("admin")]
     public class MetaAssetController : EntityController<Asset>
     {
-        public MetaAssetController(Repository<Asset> repository) : base(repository) { }
+        public MetaAssetController(IRepository<Asset> repository) : base(repository) { }
     }
 }

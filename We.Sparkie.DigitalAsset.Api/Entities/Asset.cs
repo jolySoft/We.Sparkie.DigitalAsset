@@ -37,6 +37,8 @@ namespace We.Sparkie.DigitalAsset.Api.Entities
             var typeFromExtension = ExtractTypeFromExtension(name);
             _encodingStrategies[typeFromExtension].PopulateAssetMetadata(this, audioStream);
 
+            audioStream.Position = 0;
+
             Location = await storage.Upload(this);
             await repository.Insert(this);
         }

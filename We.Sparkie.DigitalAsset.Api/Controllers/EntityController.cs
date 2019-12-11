@@ -11,9 +11,9 @@ namespace We.Sparkie.DigitalAsset.Api.Controllers
     [ApiController]
     public abstract class EntityController<TEntity> : Controller where TEntity: Entity
     {
-        private Repository<TEntity> _repository;
+        private readonly IRepository<TEntity> _repository;
 
-        protected EntityController(Repository<TEntity> repository)
+        protected EntityController(IRepository<TEntity> repository)
         {
             _repository = repository;
         }
