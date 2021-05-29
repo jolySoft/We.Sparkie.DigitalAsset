@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.File;
 using Microsoft.Extensions.Configuration;
-using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.File;
 using We.Sparkie.DigitalAsset.Api.Entities;
 
 namespace We.Sparkie.DigitalAsset.Api.Services

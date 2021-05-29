@@ -1,4 +1,5 @@
-﻿using System.Security.Authentication;
+﻿using System;
+using System.Security.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,14 +29,14 @@ namespace We.Sparkie.DigitalAsset.Api
 
             var connectionString = Configuration["MONGO_DB_CONNECTION_STRING"];
 
-            services.AddScoped<MongoDatabaseBase>(x =>
+            services.AddScoped<IMongoDatabase>(x =>
             {
                 MongoClientSettings settings = MongoClientSettings.FromUrl(new MongoUrl(connectionString));
 
                 settings.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
                 settings.GuidRepresentation = GuidRepresentation.Standard;
                 var client = new MongoClient(settings);
-                return (MongoDatabaseBase)client.GetDatabase("Sparkie");
+                return client.GetDatabase("Sparkie");
             });
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -43,7 +44,11 @@ namespace We.Sparkie.DigitalAsset.Api
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = this.GetType().Assembly.FullName, Version = "v1" }); });
             services.AddControllers();
+
+            OnServiceRegistration?.Invoke(services);
         }
+
+        public static Action<IServiceCollection> OnServiceRegistration { get; set; }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

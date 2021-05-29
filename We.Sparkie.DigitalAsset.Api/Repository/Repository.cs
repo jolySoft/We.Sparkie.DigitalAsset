@@ -8,10 +8,10 @@ namespace We.Sparkie.DigitalAsset.Api.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        private readonly MongoDatabaseBase _database;
+        private readonly IMongoDatabase _database;
         private IMongoCollection<TEntity> _entities;
 
-        public Repository(MongoDatabaseBase database)
+        public Repository(IMongoDatabase database)
         {
             _database = database;
             _entities = _database.GetCollection<TEntity>(typeof(TEntity).Name);
